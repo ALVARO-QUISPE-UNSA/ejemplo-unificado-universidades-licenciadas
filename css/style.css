@@ -17,7 +17,7 @@ h1 {
 }
 .formConsultas {
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   margin: 10px;
   /*
   background-color: #257;
@@ -40,6 +40,17 @@ h1 {
 .filtros td {
   width:20%;
   background-color: #ccc;
+}
+.resultados {
+  border-collapse: collapse;
+  margin: 10px;
+}
+.resultados td, .resultados th {
+  border: 2px solid black;
+  padding: 5px;
+  max-width: 100px;
+  word-wrap: break-word;
+  
 }
 
 input[type="submit"] {
