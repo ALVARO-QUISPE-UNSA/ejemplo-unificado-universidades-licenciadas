@@ -20,24 +20,24 @@ sub getPattern {
 #get the defied variables
 my %idx;
 if (defined($q->param("name"))) {$idx{2} = $q->param("name"); }
-if (defined($q->param("licent"))) {$idx{6} = $q->param("licent"); }
+if (defined($q->param("licent"))) {$idx{5} = $q->param("licent"); }
 if (defined($q->param("department"))) {$idx{11} = $q->param("department"); }
 if (defined($q->param("programName"))) {$idx{17} = $q->param("programName"); }
+#match and print the lines
 sub matcher {
   foreach my $line (@_) {
     chomp($line);
     my @params = split(/\|/, $line);
     my $match = 1;
-    foreach my $d (@params) {print "$d----";}
-    print "\n\n$line\n";
     foreach my $i (keys %idx) {
-      if (!$params[$i - 1] =~ /$idx{$i}/i) {$match = 0}
+      #print "$i, $idx{$i}, $params[$i-1]\n\n";
+      if (!( $params[$i - 1] =~ /$idx{$i}/i )) {$match = 0; last;}
     }
-    if ($match) { #printRow(@params); }
-      }   
+    if ($match) { printRow(@params); }
   }
 }
-matcher($file[3]);
+matcher(@file);
+#print an arras into a row 
 sub printRow {
   print "<tr>\n";
   foreach my $data (@_) { print "<td>$data</td>\n"; }
