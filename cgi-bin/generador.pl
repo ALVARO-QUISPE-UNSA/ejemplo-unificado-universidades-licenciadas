@@ -25,16 +25,19 @@ if (defined($q->param("department"))) {$idx{11} = $q->param("department"); }
 if (defined($q->param("programName"))) {$idx{17} = $q->param("programName"); }
 sub matcher {
   foreach my $line (@_) {
-    my @params = split(/\|+/, $line);
+    chomp($line);
+    my @params = split(/\|/, $line);
+    my $match = 1;
+    foreach my $d (@params) {print "$d----";}
+    print "\n\n$line\n";
     foreach my $i (keys %idx) {
-      print "$params[1], $idx{2}\n";
-      if ($params[$i - 1] =~ /$idx{$i}/i) {
-        print "yes";
-      }
+      if (!$params[$i - 1] =~ /$idx{$i}/i) {$match = 0}
     }
+    if ($match) { #printRow(@params); }
+      }   
   }
 }
-matcher($file[2]);
+matcher($file[3]);
 sub printRow {
   print "<tr>\n";
   foreach my $data (@_) { print "<td>$data</td>\n"; }
