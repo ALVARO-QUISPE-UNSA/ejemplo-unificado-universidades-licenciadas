@@ -48,9 +48,12 @@ h1 {
 .resultados td, .resultados th {
   border: 2px solid black;
   padding: 5px;
-  max-width: 100px;
+  max-width: 200px;
   word-wrap: break-word;
-  
+}
+.resultados th {
+  background-color: #555;
+  color: #fff;
 }
 
 input[type="submit"] {

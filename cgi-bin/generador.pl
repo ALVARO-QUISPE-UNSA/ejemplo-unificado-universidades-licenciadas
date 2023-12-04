@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+use Encode;
 use CGI;
 my $q = new CGI;
 print "Content-type: text/html\n\n";
@@ -48,12 +49,13 @@ sub makeRow {
 
 #MAIN-----------------
 my $rows = matcher(@file);
+$rows = encode('utf-8', $rows);
 print<<Ojosazules;
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <title>Consulta-de-universidades-licenciadas.html</title>
-    <meta charset="ISO-8859-1">
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 
   </head>
