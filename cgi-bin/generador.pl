@@ -20,23 +20,34 @@ sub getPattern {
 #get the defied variables
 my %idx;
 if (defined($q->param("name"))) {$idx{2} = $q->param("name"); }
-if (defined($q->param("licent"))) {$idx{2} = $q->param("licent"); }
-if (defined($q->param("department"))) {$idx{2} = $q->param("department"); }
-if (defined($q->param("programName"))) {$idx{2} = $q->param("programName"); }
-foreach my $v (keys %idx) {
-  print "$idx{$v}\n";
-}
+if (defined($q->param("licent"))) {$idx{6} = $q->param("licent"); }
+if (defined($q->param("department"))) {$idx{11} = $q->param("department"); }
+if (defined($q->param("programName"))) {$idx{17} = $q->param("programName"); }
 sub matcher {
-  my $name = $q->param("name");
-  my $licent = $q->param("licent");
-  my $department = $q->param("department");
-  my $programName = $q->param("programName");
-  
-  
+  foreach my $line (@_) {
+    my @params = split(/\|+/, $line);
+    foreach my $i (keys %idx) {
+      print "$params[1], $idx{2}\n";
+      if ($params[$i - 1] =~ /$idx{$i}/i) {
+        print "yes";
+      }
+    }
+  }
 }
-sub printTable {
-
+matcher($file[2]);
+sub printRow {
+  print "<tr>\n";
+  foreach my $data (@_) { print "<td>$data</td>\n"; }
+  print "</tr>\n";
 }
-
+=pod
+vemos las variables válidas,
+  - if defines con dict
+comprobamos si linea cumple le filtro
+  - separar cada campo
+imprimimos cada campo en una tabla
+  - asignar cada campo 
+  - imprimir tabla
+=cut
 
 
