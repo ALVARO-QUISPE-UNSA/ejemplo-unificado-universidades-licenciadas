@@ -25,6 +25,7 @@ if (defined($q->param("department"))) {$idx{11} = $q->param("department"); }
 if (defined($q->param("programName"))) {$idx{17} = $q->param("programName"); }
 #match and print the lines
 sub matcher {
+  my $results = "";
   foreach my $line (@_) {
     chomp($line);
     my @params = split(/\|/, $line);
@@ -33,14 +34,16 @@ sub matcher {
       #print "$i, $idx{$i}, $params[$i-1]\n\n";
       if (!( $params[$i - 1] =~ /$idx{$i}/i )) {$match = 0; last;}
     }
-    if ($match) { printRow(@params); }
+    if ($match) { $results .= makeRow(@params); }
   }
+  return $results;
 }
-#print an arras into a row 
-sub printRow {
-  print "<tr>\n";
-  foreach my $data (@_) { print "<td>$data</td>\n"; }
-  print "</tr>\n";
+#convert an array into a row 
+sub makeRow {
+  my $row = "<tr>\n";
+  foreach my $data (@_) { $row .= "<td>$data</td>\n"; }
+  $row .= "</tr>\n";
+  return $row;
 }
 
 #MAIN-----------------
