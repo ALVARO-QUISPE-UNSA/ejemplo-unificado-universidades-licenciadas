@@ -36,21 +36,89 @@ sub matcher {
     if ($match) { printRow(@params); }
   }
 }
-matcher(@file);
 #print an arras into a row 
 sub printRow {
   print "<tr>\n";
   foreach my $data (@_) { print "<td>$data</td>\n"; }
   print "</tr>\n";
 }
-=pod
-vemos las variables válidas,
-  - if defines con dict
-comprobamos si linea cumple le filtro
-  - separar cada campo
-imprimimos cada campo en una tabla
-  - asignar cada campo 
-  - imprimir tabla
-=cut
 
+#MAIN-----------------
+my $rows = matcher(@file);
+print<<Ojosazules
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Consulta-de-universidades-licenciadas.html</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 
+  </head>
+
+  <body>
+    <!--Menú de arriva -->
+    <ul class="menuList" >
+      <li class="dlist"><a class="itemList" href="http://192.168.0.17/~alumno/">Menú</a></li>
+      <li ><img src="src/logoUnsa.png"></li>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <!--Parte el título -->
+    <h1>Realice su consulta</h1>
+
+    <form class="formConsultas" method="get" action="./cgi-bin/generador.pl">
+      <table class="filtros">
+        <tr>
+          <th>Nombre de universidad</th>
+          <td><input type="text" name="name"></td>
+          <th>Periodo de licenciamiento</th>
+          <td><input type="number" name="licent"></td>
+        </tr>
+        <tr>
+          <th>Departamento local</th>
+          <td><input type="text" name="department"></td>
+          <th>Denominación de programa</th>
+          <td><input type="text" name="programName"></td>
+        </tr>
+      </table>
+      <input type="submit" value="BUSCAR">
+    </form>
+    <br>
+    <!--Parte de los resultados-->
+
+    <table class="resultados">
+      <tr>
+        <th>CODIGO ENTIDAD</th>
+        <th>NOMBRE</th>
+        <th>TIPO GESTION</th>
+        <th>ESTADO LICENCIAMIENTO</th>
+        <th>PERIODO LICENCIAMIENTO</th>
+        <th>CODIGO FILIAL</th>
+        <th>NOMBRE FILIAL</th>
+        <th>DEPARTAMENTO FILIAL</th>
+        <th>PROVINCIA FILIAL</th>
+        <th>CODIGO LOCAL</th>
+        <th>DEPARTAMENTO LOCAL</th>
+        <th>PROVINCIA LOCAL</th>
+        <th>DISTRITO LOCAL</th>
+        <th>LATITUD UBICACION</th>
+        <th>LONGITUD UBICACION</th>
+        <th>TIPO AUTORIZACION LOCAL</th>
+        <th>DENOMINACION PROGRAMA</th>
+        <th>TIPO NIVEL ACADEMICO</th>
+        <th>NIVEL ACADEMICO</th>
+        <th>CODIGO CLASE PROGRAMA N2</th>
+        <th>NOMBRE CLASE PROGRAMA N2</th>
+        <th>TIPO AUTORIZACION PROGRAMA</th>
+        <th>TIPO AUTORIZACION PROGRAMA LOCAL</th>
+      </tr>
+      <tr>
+        $rows
+      </tr>
+    </table>
+
+  </body>
+</html>
+
+Ojosazules
