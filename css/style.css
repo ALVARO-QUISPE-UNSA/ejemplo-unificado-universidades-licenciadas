@@ -16,7 +16,7 @@ h1 {
   
 }
 .formConsultas {
-  display: flex;
+  /*display: flex;*/
   /*align-items: center;*/
   margin: 10px;
   /*
@@ -62,7 +62,6 @@ input[type="submit"] {
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
-  font-size: 16px;
 }
 input[type="submit"]:hover {
   background-color: #357ae8;

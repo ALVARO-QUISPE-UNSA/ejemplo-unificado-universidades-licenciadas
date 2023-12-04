@@ -1,18 +1,19 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-open(IN, "../src/Programas-de-universidades.csv");
+open(IN, "../src/Programas-de-universidades.csv") or die "File not found\n";
 my @file = <IN>;
+
 close(IN);
 sub encabezado {
   my $line = $_[0];
   my $c = 1;
   while ($line =~ /^([^\|]+)\|(.+)/) {
-    print STDERR "$c): ".$1."\n";
+    print "$c): $1\n";
     $line = $2;
     $c++;
   }
-  print STDERR "$c): $line\n";
+  print "$c): $line\n";
 }
 sub getPattern {
   my $first = "";
@@ -24,8 +25,8 @@ sub getPattern {
 }
 #MAIN-----
 encabezado($file[0]);
+encabezado($file[1]);
 my $pattern = getPattern(23);
-print STDERR $pattern."\n";
 my %dict;
 foreach my $line (@file) {
   if ($line =~ /$pattern/) {
@@ -40,7 +41,7 @@ foreach my $line (@file) {
   }
 }
 foreach my $i (keys %dict) {
-  print "$i\t$dict{$i}\n"
+  #print "$i\t$dict{$i}\n"
 }
 =pod 
 te quedaste en el video después del nombrado
