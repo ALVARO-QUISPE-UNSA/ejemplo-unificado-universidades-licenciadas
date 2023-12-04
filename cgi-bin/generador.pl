@@ -48,13 +48,13 @@ sub makeRow {
 
 #MAIN-----------------
 my $rows = matcher(@file);
-print<<Ojosazules
+print<<Ojosazules;
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <title>Consulta-de-universidades-licenciadas.html</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <meta charset="ISO-8859-1">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 
   </head>
 
@@ -62,7 +62,7 @@ print<<Ojosazules
     <!--Menú de arriva -->
     <ul class="menuList" >
       <li class="dlist"><a class="itemList" href="http://192.168.0.17/~alumno/">Menú</a></li>
-      <li ><img src="src/logoUnsa.png"></li>
+      <li ><img src="../src/logoUnsa.png"></li>
     </ul>
     <br>
     <br>
@@ -117,7 +117,9 @@ print<<Ojosazules
         <th>TIPO AUTORIZACION PROGRAMA LOCAL</th>
       </tr>
       <tr>
-        $rows
+Ojosazules
+print $rows;
+print<<Ojosazules;
       </tr>
     </table>
 
